@@ -51,3 +51,18 @@ impl AsciiBitset {
         self.0[i / 64] |= 1 << (i % 64);
     }
 }
+
+pub struct SortingSolution;
+
+impl IsUnique for SortingSolution {
+    fn is_unique(string: &str) -> bool {
+        let mut chars: Vec<_> = string.chars().collect();
+        chars.sort_unstable();
+        for window in chars.windows(2) {
+            if window[0] == window[1] {
+                return false;
+            }
+        }
+        true
+    }
+}
