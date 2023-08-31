@@ -8,7 +8,7 @@ impl PalindromePermutation for HashMapSolution {
         let mut letter_counts = HashMap::new();
         let mut char_count = 0;
         for c in string.chars() {
-            if c == ' ' {
+            if !c.is_ascii_alphabetic() {
                 continue;
             }
             char_count += 1;
@@ -37,5 +37,27 @@ impl PalindromePermutation for HashMapSolution {
             }
         }
         true
+    }
+}
+
+pub struct BitsetSolution;
+
+impl PalindromePermutation for BitsetSolution {
+    fn palindrome_permutation(string: &str) -> bool {
+        // Letters is a bitset of whether each letter has an odd count.
+        let mut letters = 0u32;
+        let mut char_count = 0;
+        for c in string.chars() {
+            if !c.is_ascii_alphabetic() {
+                continue;
+            }
+            char_count += 1;
+            let c = c.to_lowercase().next().unwrap();
+            letters ^= 1 << (c as usize - 'a' as usize);
+        }
+        let odd_letters = letters.count_ones();
+        // If the string length is odd, we may have exactly one odd character
+        // count. Otherwise, all letters must be of even count.
+        (char_count % 2 == 0 && odd_letters == 0) || (char_count % 2 == 1 && odd_letters == 1)
     }
 }

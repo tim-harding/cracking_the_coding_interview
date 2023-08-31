@@ -12,7 +12,7 @@ impl PalindromePermutation for Solution {
     fn palindrome_permutation(string: &str) -> bool {
         // Replace with your solution
         use crate::solutions::_01_arrays_and_strings::_04_palindrome_permutation as solutions;
-        solutions::Solution::palindrome_permutation(string)
+        solutions::BitsetSolution::palindrome_permutation(string)
     }
 }
 
@@ -25,6 +25,7 @@ mod tests {
         assert!(Solution::palindrome_permutation(""));
         assert!(Solution::palindrome_permutation("abcba"));
         assert!(Solution::palindrome_permutation("abccba"));
+        assert!(Solution::palindrome_permutation("aaaab"));
         // taco cat
         assert!(Solution::palindrome_permutation("Tact Coa"));
         // Mr Owl ate my metal worm
@@ -37,5 +38,6 @@ mod tests {
     fn rejects_non_palindromes() {
         assert!(!Solution::palindrome_permutation("Charmander"));
         assert!(!Solution::palindrome_permutation("Telegraph"));
+        assert!(!Solution::palindrome_permutation("aaaaab"));
     }
 }
