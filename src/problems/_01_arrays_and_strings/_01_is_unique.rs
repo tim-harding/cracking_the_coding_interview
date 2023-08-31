@@ -9,8 +9,8 @@ struct Solution;
 impl IsUnique for Solution {
     fn is_unique(string: &str) -> bool {
         // Replace with your solution
-        use crate::solutions::_01_arrays_and_strings::_01_is_unique::HashsetSolution;
-        HashsetSolution::is_unique(string)
+        use crate::solutions::_01_arrays_and_strings::_01_is_unique as solutions;
+        solutions::HashsetSolution::is_unique(string)
     }
 }
 
