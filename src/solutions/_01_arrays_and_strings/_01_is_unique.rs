@@ -21,6 +21,9 @@ impl IsUnique for AsciiSolution {
     fn is_unique(string: &str) -> bool {
         let mut bitset = AsciiBitset::new();
         for c in string.chars() {
+            if !c.is_ascii() {
+                panic!("Expected an ASCII character");
+            }
             if bitset.get(c) {
                 return false;
             }
@@ -40,13 +43,10 @@ impl AsciiBitset {
 
     pub fn get(&self, c: char) -> bool {
         let i = c as usize;
-        c.is_ascii() && ((self.0[i / 64] >> (i % 64)) & 1) == 1
+        ((self.0[i / 64] >> (i % 64)) & 1) == 1
     }
 
     pub fn set(&mut self, c: char) {
-        if !c.is_ascii() {
-            panic!("Expected an ASCII character");
-        }
         let i = c as usize;
         self.0[i / 64] |= 1 << (i % 64);
     }
