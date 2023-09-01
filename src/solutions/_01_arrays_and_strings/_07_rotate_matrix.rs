@@ -4,10 +4,10 @@ pub struct Solution;
 
 impl RotateMatrix for Solution {
     fn rotate_matrix(matrix: &mut SquareMatrix) {
-        // Iterate over a triangle forming a 1/8th slice of the image
+        // Iterate over a triangle forming a 1/4th slice of the image
         let n = matrix.n;
-        for y in 0..n / 2 {
-            for x in y..n / 2 {
+        for y in 0..n {
+            for x in y..n - y - 1 {
                 let mut x = x;
                 let mut y = y;
                 let mut tmp = matrix.cells[y * n + x];
@@ -23,11 +23,11 @@ impl RotateMatrix for Solution {
 fn rotate_90(x: usize, y: usize, n: usize) -> (usize, usize) {
     // let h = n / 2
     // Translate by (-h, -h) such that the center as at the origin
-    // Apply the 90° rotation matrix
+    // Apply the 90° counterclockwise rotation matrix
     // Reverse the translation
     // ┏      ┓┏   ┓   ┏ ┓   ┏   ┓
-    // ┃  0 1 ┃┃x-h┃ + ┃h┃ = ┃  y┃
-    // ┃ -1 0 ┃┃y-h┃   ┃h┃   ┃n-x┃
+    // ┃ 0 -1 ┃┃x-h┃ + ┃h┃ = ┃n-y┃
+    // ┃ 1  0 ┃┃y-h┃   ┃h┃   ┃  x┃
     // ┗      ┛┗   ┛   ┗ ┛   ┗   ┛
-    (y, n - x - 1)
+    (n - 1 - y, x)
 }
