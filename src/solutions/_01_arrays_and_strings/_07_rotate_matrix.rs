@@ -1,9 +1,10 @@
-use crate::problems::_01_arrays_and_strings::_07_rotate_matrix::{RotateMatrix, SquareMatrix};
+use crate::problems::_01_arrays_and_strings::{Matrix, _07_rotate_matrix::RotateMatrix};
 
 pub struct Solution;
 
 impl RotateMatrix for Solution {
-    fn rotate_matrix(matrix: &mut SquareMatrix) {
+    fn rotate_matrix(matrix: &mut Matrix) {
+        assert_eq!(matrix.m, matrix.n);
         // Iterate over a triangle forming a 1/4th slice of the image
         let n = matrix.n;
         for y in 0..n / 2 {

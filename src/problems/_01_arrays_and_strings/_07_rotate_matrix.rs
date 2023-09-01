@@ -1,48 +1,17 @@
-use std::fmt::{self, Debug, Formatter};
+use super::matrix::Matrix;
 
 pub trait RotateMatrix {
     /// Given an NxN matrix write a method to rotate it by 90 degrees.
-    fn rotate_matrix(matrix: &mut SquareMatrix);
+    fn rotate_matrix(matrix: &mut Matrix);
 }
 
 struct Solution;
 
 impl RotateMatrix for Solution {
-    fn rotate_matrix(matrix: &mut SquareMatrix) {
+    fn rotate_matrix(matrix: &mut Matrix) {
         // Replace with your solution
         use crate::solutions::_01_arrays_and_strings::_07_rotate_matrix as solutions;
         solutions::Solution::rotate_matrix(matrix)
-    }
-}
-
-#[derive(Clone, PartialEq, Eq)]
-pub struct SquareMatrix {
-    pub cells: Vec<u8>,
-    pub n: usize,
-}
-
-impl Debug for SquareMatrix {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        let cells: Vec<_> = self.cells.iter().map(|cell| format!("{cell}")).collect();
-        let column_widths: Vec<_> = (0..self.n)
-            .map(|i| {
-                cells
-                    .iter()
-                    .skip(i)
-                    .step_by(self.n)
-                    .map(|cell| cell.len())
-                    .max()
-                    .unwrap()
-            })
-            .collect();
-
-        for chunk in cells.chunks(self.n) {
-            for (column, cell) in chunk.iter().enumerate() {
-                write!(f, "{:>1$}", cell, column_widths[column] + 1)?;
-            }
-            writeln!(f)?;
-        }
-        Ok(())
     }
 }
 
@@ -51,9 +20,10 @@ mod tests {
     use super::*;
 
     #[test]
-    fn rotates_3x3_image() {
+    fn rotates_3x3() {
         #[rustfmt::skip]
-        let mut input = SquareMatrix {
+        let mut input = Matrix {
+            m: 3,
             n: 3,
             cells: vec![
                 1, 2, 3, 
@@ -63,7 +33,8 @@ mod tests {
         };
 
         #[rustfmt::skip]
-        let expected = SquareMatrix {
+        let expected = Matrix {
+            m: 3,
             n: 3,
             cells: vec![
                 7, 4, 1,
@@ -77,9 +48,10 @@ mod tests {
     }
 
     #[test]
-    fn rotates_4x4_image() {
+    fn rotates_4x4() {
         #[rustfmt::skip]
-        let mut input = SquareMatrix {
+        let mut input = Matrix {
+            m: 4,
             n: 4,
             cells: vec![
                  1,  2,  3,  4,
@@ -90,7 +62,8 @@ mod tests {
         };
 
         #[rustfmt::skip]
-        let expected = SquareMatrix {
+        let expected = Matrix {
+            m: 4,
             n: 4,
             cells: vec![
                 13,  9, 5, 1,
