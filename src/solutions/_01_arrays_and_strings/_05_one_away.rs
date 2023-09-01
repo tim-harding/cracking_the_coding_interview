@@ -15,8 +15,8 @@ impl OneAway for Solution {
 }
 
 fn is_edit(a: &str, b: &str) -> bool {
-    let mut a = a.chars().peekable();
-    let mut b = b.chars().peekable();
+    let mut a = a.chars();
+    let mut b = b.chars();
     loop {
         match (a.next(), b.next()) {
             (None, Some(_)) | (Some(_), None) => unreachable!(),
