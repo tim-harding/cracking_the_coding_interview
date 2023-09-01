@@ -4,3 +4,4 @@ pub mod _03_urlify;
 pub mod _04_palindrome_permutation;
 pub mod _05_one_away;
 pub mod _06_string_compression;
+pub mod _07_rotate_matrix;
