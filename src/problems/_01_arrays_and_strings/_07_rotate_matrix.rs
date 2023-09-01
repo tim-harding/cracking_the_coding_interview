@@ -1,20 +1,48 @@
-pub trait RotateMatrix {
-    /// Given an image represented by an NxN matrix, where each pixel in the
-    /// image is 4 bytes, write a method to rotate the image by 90 degrees. Can
-    /// you do this in place?
-    fn rotate_matrix(image: &mut Vec<Pixel>, n: usize);
-}
+use std::fmt::{self, Debug, Formatter};
 
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord)]
-pub struct Pixel([u8; 4]);
+pub trait RotateMatrix {
+    /// Given an NxN matrix write a method to rotate it by 90 degrees.
+    fn rotate_matrix(matrix: &mut SquareMatrix);
+}
 
 struct Solution;
 
 impl RotateMatrix for Solution {
-    fn rotate_matrix(image: &mut Vec<Pixel>, n: usize) {
+    fn rotate_matrix(matrix: &mut SquareMatrix) {
         // Replace with your solution
         use crate::solutions::_01_arrays_and_strings::_07_rotate_matrix as solutions;
-        solutions::Solution::rotate_matrix(image, n)
+        solutions::Solution::rotate_matrix(matrix)
+    }
+}
+
+#[derive(Clone, PartialEq, Eq)]
+pub struct SquareMatrix {
+    pub cells: Vec<u8>,
+    pub n: usize,
+}
+
+impl Debug for SquareMatrix {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        let cells: Vec<_> = self.cells.iter().map(|cell| format!("{cell}")).collect();
+        let column_widths: Vec<_> = (0..self.n)
+            .map(|i| {
+                cells
+                    .iter()
+                    .skip(i)
+                    .step_by(self.n)
+                    .map(|cell| cell.len())
+                    .max()
+                    .unwrap()
+            })
+            .collect();
+
+        for chunk in cells.chunks(self.n) {
+            for (column, cell) in chunk.iter().enumerate() {
+                write!(f, "{:>1$}", cell, column_widths[column] + 1)?;
+            }
+            writeln!(f)?;
+        }
+        Ok(())
     }
 }
 
@@ -25,42 +53,52 @@ mod tests {
     #[test]
     fn rotates_3x3_image() {
         #[rustfmt::skip]
-        let mut input = monochrome_image(&[
-            1, 2, 3, 
-            4, 5, 6,
-            7, 8, 9,
-        ]);
+        let mut input = SquareMatrix {
+            n: 3,
+            cells: vec![
+                1, 2, 3, 
+                4, 5, 6,
+                7, 8, 9,
+            ],
+        };
+
         #[rustfmt::skip]
-        let expected = monochrome_image(&[
-            7, 4, 1,
-            8, 5, 2,
-            9, 6, 3,
-        ]);
-        Solution::rotate_matrix(&mut input, 3);
+        let expected = SquareMatrix {
+            n: 3,
+            cells: vec![
+                7, 4, 1,
+                8, 5, 2,
+                9, 6, 3,
+            ],
+        };
+
+        Solution::rotate_matrix(&mut input);
         assert_eq!(input, expected);
     }
 
     #[test]
     fn rotates_4x4_image() {
         #[rustfmt::skip]
-        let mut input = monochrome_image(&[
-             1,  2,  3,  4,
-             5,  6,  7,  8,
-             9, 10, 11, 12,
-            13, 14, 15, 16,
-        ]);
+        let mut input = SquareMatrix {
+            n: 4,
+            cells: vec![
+                 1,  2,  3,  4,
+                 5,  6,  7,  8,
+                 9, 10, 11, 12,
+                13, 14, 15, 16,
+            ],
+        };
         #[rustfmt::skip]
-        let expected = monochrome_image(&[
-            13,  9, 5, 1,
-            14, 10, 6, 2,
-            15, 11, 7, 3,
-            16, 12, 8, 4,
-        ]);
-        Solution::rotate_matrix(&mut input, 4);
+        let expected = SquareMatrix {
+            n: 4,
+            cells: vec![
+                13,  9, 5, 1,
+                14, 10, 6, 2,
+                15, 11, 7, 3,
+                16, 12, 8, 4,
+            ],
+        };
+        Solution::rotate_matrix(&mut input);
         assert_eq!(input, expected);
-    }
-
-    fn monochrome_image(values: &[u8]) -> Vec<Pixel> {
-        values.into_iter().map(|&v| Pixel([v, v, v, v])).collect()
     }
 }
