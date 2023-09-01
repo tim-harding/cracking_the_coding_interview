@@ -88,6 +88,7 @@ mod tests {
                 13, 14, 15, 16,
             ],
         };
+
         #[rustfmt::skip]
         let expected = SquareMatrix {
             n: 4,
@@ -98,6 +99,7 @@ mod tests {
                 16, 12, 8, 4,
             ],
         };
+
         Solution::rotate_matrix(&mut input);
         assert_eq!(input, expected);
     }

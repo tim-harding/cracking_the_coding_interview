@@ -6,7 +6,7 @@ impl RotateMatrix for Solution {
     fn rotate_matrix(matrix: &mut SquareMatrix) {
         // Iterate over a triangle forming a 1/4th slice of the image
         let n = matrix.n;
-        for y in 0..n {
+        for y in 0..n / 2 {
             for x in y..n - y - 1 {
                 let mut x = x;
                 let mut y = y;
