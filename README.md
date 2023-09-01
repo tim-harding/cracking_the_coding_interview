@@ -8,7 +8,8 @@ the separate `solutions` module so you won't be influenced by the correct
 answers when approaching problems. Oftentimes, several alternate solutions are
 provided for various constraints. Note that this is supplementary material and
 the book is recommended for additional advice on interviewing, negotiation, and
-how to approach problems. 
+how to approach problems. The book also contains knowledge and design questions
+that don't translate well to this format. 
 
 ## Usage 
 To get started, open the file
