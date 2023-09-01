@@ -26,10 +26,16 @@ mod tests {
     #[test]
     fn compresses() {
         assert_eq!(Solution::string_compression("aabcccccaaa"), "a2b1c5a3");
+        assert_eq!(Solution::string_compression("aaaaaaaaaaaa"), "a12");
+        assert_eq!(
+            Solution::string_compression(format!("{:a<1$}", "", 105).as_str()),
+            "a105"
+        );
     }
 
     #[test]
     fn returns_original_string() {
         assert_eq!(Solution::string_compression("abca"), "abca");
+        assert_eq!(Solution::string_compression("aabbcca"), "aabbcca");
     }
 }
