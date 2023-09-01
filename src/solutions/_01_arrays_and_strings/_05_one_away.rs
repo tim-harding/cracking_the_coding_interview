@@ -5,16 +5,7 @@ pub struct Solution;
 impl OneAway for Solution {
     fn one_away(a: &str, b: &str) -> bool {
         if a.len() == b.len() {
-            let mut found_edit = false;
-            for (a, b) in a.chars().zip(b.chars()) {
-                if a != b {
-                    if found_edit {
-                        return false;
-                    }
-                    found_edit = true;
-                }
-            }
-            true
+            is_edit(a, b)
         } else if a.len() < b.len() {
             is_deletion(a, b)
         } else {
@@ -23,21 +14,63 @@ impl OneAway for Solution {
     }
 }
 
+fn is_edit(a: &str, b: &str) -> bool {
+    let mut a = a.chars().peekable();
+    let mut b = b.chars().peekable();
+    loop {
+        match (a.next(), b.next()) {
+            (None, Some(_)) | (Some(_), None) => unreachable!(),
+            (None, None) => return true,
+            (Some(a), Some(b)) => {
+                if a != b {
+                    break;
+                }
+            }
+        }
+    }
+
+    loop {
+        match (a.next(), b.next()) {
+            (None, Some(_)) | (Some(_), None) => return false,
+            (None, None) => return true,
+            (Some(a), Some(b)) => {
+                if a != b {
+                    return false;
+                }
+            }
+        }
+    }
+}
+
 /// b should be longer than a. Returns true if the strings are the same
 /// apart from b containing one extra character.
 fn is_deletion(a: &str, b: &str) -> bool {
-    let mut a = a.chars();
-    let mut b = b.chars();
-    while let (Some(a), Some(b)) = (a.next(), b.next()) {
-        if a != b {
-            break;
+    let mut a = a.chars().peekable();
+    let mut b = b.chars().peekable();
+    loop {
+        match (a.peek(), b.peek()) {
+            (None, None) | (Some(_), None) => unreachable!(),
+            (None, Some(_)) => break,
+            (Some(a), Some(b)) => {
+                if a != b {
+                    break;
+                }
+            }
         }
+        a.next();
+        b.next();
     }
     b.next();
-    while let (Some(a), Some(b)) = (a.next(), b.next()) {
-        if a != b {
-            return false;
+
+    loop {
+        match (a.next(), b.next()) {
+            (None, None) => return true,
+            (None, Some(_)) | (Some(_), None) => return false,
+            (Some(a), Some(b)) => {
+                if a != b {
+                    return false;
+                }
+            }
         }
     }
-    a.next().is_none() && b.next().is_none()
 }
