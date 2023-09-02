@@ -5,13 +5,15 @@ pub struct Solution;
 impl RotateMatrix for Solution {
     fn rotate_matrix(matrix: &mut Matrix) {
         assert_eq!(matrix.m, matrix.n);
-        // Iterate over a triangle forming a 1/4th slice of the image
         let n = matrix.n;
+        // Iterate over a triangle forming a 1/4th slice of the image
         for y in 0..n / 2 {
             for x in y..n - y - 1 {
                 let mut x = x;
                 let mut y = y;
                 let mut tmp = matrix.cells[y * n + x];
+                // Rotate the cell at (x,y) through 90°, rotate that cell 90°,
+                // and so on for a full rotation.
                 for _ in 0..4 {
                     (x, y) = rotate_90(x, y, n);
                     std::mem::swap(&mut matrix.cells[y * n + x], &mut tmp);

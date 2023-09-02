@@ -20,6 +20,7 @@ impl CheckPermutation for AsciiSolution {
             return false;
         }
 
+        // Count up how many of each character are in a
         let mut counts = [0u16; 128];
         for c in a.chars() {
             if !c.is_ascii() {
@@ -29,6 +30,8 @@ impl CheckPermutation for AsciiSolution {
             counts[i] += 1;
         }
 
+        // Decrement the counts by each character in b. If any of the counts go
+        // negative, there was a mismatch.
         for c in b.chars() {
             if !c.is_ascii() {
                 panic!("Expected an ASCII character");

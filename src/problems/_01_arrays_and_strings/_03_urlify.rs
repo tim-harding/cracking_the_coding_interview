@@ -6,7 +6,7 @@ pub trait Urlify {
     ///
     /// Note that in Rust, because it is not possible to index strings, you will
     /// likely need to convert the string into a Vec first. For the purposes of
-    /// the problem, you assume that the input will be ASCII-encoded.
+    /// the problem, assume that the input will be ASCII-encoded.
     fn urlify(string: &mut String, len: usize);
 }
 

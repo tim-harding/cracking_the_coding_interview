@@ -8,8 +8,11 @@ impl PalindromePermutation for HashMapSolution {
         let mut letter_counts = HashMap::new();
         let mut char_count = 0;
         for c in string.chars() {
-            if !c.is_ascii_alphabetic() {
+            if c.is_ascii_whitespace() {
                 continue;
+            }
+            if !c.is_ascii_alphabetic() {
+                return false;
             }
             char_count += 1;
 
@@ -48,8 +51,11 @@ impl PalindromePermutation for BitsetSolution {
         let mut letters = 0u32;
         let mut char_count = 0;
         for c in string.chars() {
-            if !c.is_ascii_alphabetic() {
+            if c.is_ascii_whitespace() {
                 continue;
+            }
+            if !c.is_ascii_alphabetic() {
+                return false;
             }
             char_count += 1;
             let c = c.to_lowercase().next().unwrap();

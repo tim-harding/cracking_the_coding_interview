@@ -14,6 +14,8 @@ impl OneAway for Solution {
     }
 }
 
+/// a and b should be the same length. Returns true if there are one or zero
+/// characters different between the two.
 fn is_edit(a: &str, b: &str) -> bool {
     let mut a = a.chars();
     let mut b = b.chars();

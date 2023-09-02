@@ -4,6 +4,8 @@ pub struct Solution;
 
 impl ZeroMatrix for Solution {
     fn zero_matrix(matrix: &Matrix) -> Matrix {
+        // Track which columns have zeroes in indices 0..n and which rows have
+        // zeroes in indices 0..m
         let mut bitset = Bitset::new(matrix.n + matrix.m);
         for y in 0..matrix.m {
             for x in 0..matrix.n {
@@ -14,6 +16,8 @@ impl ZeroMatrix for Solution {
             }
         }
 
+        // Copy over each matrix element unless there was a zero found in its
+        // row or column.
         let mut out = Matrix::new(matrix.n, matrix.m, vec![0u8; matrix.n * matrix.m]);
         for y in 0..matrix.m {
             for x in 0..matrix.n {
