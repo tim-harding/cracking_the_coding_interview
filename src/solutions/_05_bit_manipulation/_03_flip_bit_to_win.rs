@@ -12,11 +12,10 @@ impl FlipBitToWin for Solution {
                 current += 1;
             } else {
                 best = best.max(current + previous);
-                previous = current;
+                previous = current + 1;
                 current = 0;
             }
         }
-        best = best.max(current + previous);
-        best + 1
+        best.max(current + previous)
     }
 }

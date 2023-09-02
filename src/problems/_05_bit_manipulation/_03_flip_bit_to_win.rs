@@ -25,5 +25,9 @@ mod tests {
         assert_eq!(Solution::flip_bit_to_win(0b11011000011), 5);
         assert_eq!(Solution::flip_bit_to_win(0b1001), 2);
         assert_eq!(Solution::flip_bit_to_win(0b11011101111), 8);
+        assert_eq!(Solution::flip_bit_to_win(u64::MAX), 64);
+        assert_eq!(Solution::flip_bit_to_win(u64::MAX - 0b1), 64);
+        assert_eq!(Solution::flip_bit_to_win(u64::MAX - 0b11), 63);
+        assert_eq!(Solution::flip_bit_to_win(u64::MAX - 0b1001), 63);
     }
 }
