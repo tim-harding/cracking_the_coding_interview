@@ -1,9 +1,9 @@
 use crate::problems::_01_arrays_and_strings::_01_is_unique::IsUnique;
 use std::collections::HashSet;
 
-pub struct HashsetSolution;
+pub struct Solution;
 
-impl IsUnique for HashsetSolution {
+impl IsUnique for Solution {
     fn is_unique(string: &str) -> bool {
         let mut set = HashSet::new();
         for c in string.chars() {

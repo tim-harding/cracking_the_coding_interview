@@ -12,7 +12,7 @@ impl PalindromePermutation for Solution {
     fn palindrome_permutation(string: &str) -> bool {
         // Replace with your solution
         use crate::solutions::_01_arrays_and_strings::_04_palindrome_permutation as solutions;
-        solutions::BitsetSolution::palindrome_permutation(string)
+        solutions::Solution::palindrome_permutation(string)
     }
 }
 

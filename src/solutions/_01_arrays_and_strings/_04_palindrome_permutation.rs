@@ -1,9 +1,9 @@
 use crate::problems::_01_arrays_and_strings::_04_palindrome_permutation::PalindromePermutation;
 use std::collections::{hash_map::Entry, HashMap};
 
-pub struct HashMapSolution;
+pub struct Solution;
 
-impl PalindromePermutation for HashMapSolution {
+impl PalindromePermutation for Solution {
     fn palindrome_permutation(string: &str) -> bool {
         let mut letter_counts = HashMap::new();
         let mut char_count = 0;

@@ -10,7 +10,7 @@ impl CheckPermutation for Solution {
     fn check_permutation(a: &str, b: &str) -> bool {
         // Replace with your solution
         use crate::solutions::_01_arrays_and_strings::_02_check_permutation as solutions;
-        solutions::AsciiSolution::check_permutation(a, b)
+        solutions::Solution::check_permutation(a, b)
     }
 }
 

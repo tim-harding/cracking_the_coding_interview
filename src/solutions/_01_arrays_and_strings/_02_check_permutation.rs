@@ -1,8 +1,8 @@
 use crate::problems::_01_arrays_and_strings::_02_check_permutation::CheckPermutation;
 
-pub struct SortingSolution;
+pub struct Solution;
 
-impl CheckPermutation for SortingSolution {
+impl CheckPermutation for Solution {
     fn check_permutation(a: &str, b: &str) -> bool {
         let mut a: Vec<_> = a.chars().collect();
         let mut b: Vec<_> = b.chars().collect();
