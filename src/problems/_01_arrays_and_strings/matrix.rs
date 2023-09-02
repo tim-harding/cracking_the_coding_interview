@@ -1,4 +1,7 @@
-use std::fmt::{self, Debug, Formatter};
+use std::{
+    fmt::{self, Debug, Formatter},
+    ops::{Deref, Index, IndexMut},
+};
 
 #[derive(Clone, PartialEq, Eq)]
 pub struct Matrix {
@@ -8,6 +11,21 @@ pub struct Matrix {
     pub m: usize,
     /// Number of columns
     pub n: usize,
+}
+
+impl Matrix {
+    pub fn new(n: usize, m: usize, cells: Vec<u8>) -> Self {
+        Self { n, m, cells }
+    }
+
+    pub fn get(&self, x: usize, y: usize) -> u8 {
+        self[y * self.n + x]
+    }
+
+    pub fn set(&mut self, x: usize, y: usize, cell: u8) {
+        let n = self.n;
+        self[y * n + x] = cell;
+    }
 }
 
 impl Debug for Matrix {
@@ -32,5 +50,27 @@ impl Debug for Matrix {
             writeln!(f)?;
         }
         Ok(())
+    }
+}
+
+impl Deref for Matrix {
+    type Target = [u8];
+
+    fn deref(&self) -> &Self::Target {
+        self.cells.as_slice()
+    }
+}
+
+impl Index<usize> for Matrix {
+    type Output = u8;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        &self.cells[index]
+    }
+}
+
+impl IndexMut<usize> for Matrix {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        &mut self.cells[index]
     }
 }
