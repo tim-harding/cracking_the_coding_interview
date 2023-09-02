@@ -6,4 +6,4 @@ pub mod _05_one_away;
 pub mod _06_string_compression;
 pub mod _07_rotate_matrix;
 pub mod _08_zero_matrix;
-
+pub mod _09_string_rotation;
