@@ -28,6 +28,7 @@ mod tests {
 
     #[test]
     fn returns_original_for_no_greater() {
+        assert_eq!(Solution::next_greater(0b0), 0b0);
         assert_eq!(Solution::next_greater(u64::MAX), u64::MAX);
         assert_eq!(Solution::next_greater(u64::MAX - 1), u64::MAX - 1);
         assert_eq!(Solution::next_greater(u64::MAX - 3), u64::MAX - 3);
@@ -35,8 +36,9 @@ mod tests {
 
     #[test]
     fn returns_original_for_no_lesser() {
-        assert_eq!(Solution::next_lesser(0), 0);
+        assert_eq!(Solution::next_lesser(0b0), 0b0);
         assert_eq!(Solution::next_lesser(0b111), 0b111);
+        assert_eq!(Solution::next_lesser(u64::MAX), u64::MAX);
     }
 
     #[test]
@@ -50,6 +52,9 @@ mod tests {
         assert_eq!(Solution::next_greater(0b10101), 0b10110);
         assert_eq!(Solution::next_greater(0b100111), 0b101011);
         assert_eq!(Solution::next_greater(0b100111000), 0b101000011);
+        assert_eq!(Solution::next_greater(0b10010011), 0b10010101);
+        assert_eq!(Solution::next_greater(0b100110011), 0b100110101);
+        assert_eq!(Solution::next_greater(0b1000011), 0b1000101);
     }
 
     #[test]
@@ -62,6 +67,9 @@ mod tests {
         assert_eq!(Solution::next_lesser(0b10011), 0b1110);
         assert_eq!(Solution::next_lesser(0b10101), 0b10011);
         assert_eq!(Solution::next_lesser(0b100111), 0b11110);
-        assert_eq!(Solution::next_lesser(0b100111000), 0b10011010);
+        assert_eq!(Solution::next_lesser(0b100111000), 0b100110100);
+        assert_eq!(Solution::next_lesser(0b10010011), 0b10001110);
+        assert_eq!(Solution::next_lesser(0b100110011), 0b100101110);
+        assert_eq!(Solution::next_lesser(0b1000011), 0b111000);
     }
 }
