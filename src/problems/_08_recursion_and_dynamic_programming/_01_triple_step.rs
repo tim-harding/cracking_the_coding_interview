@@ -11,7 +11,7 @@ impl TripleStep for Solution {
     fn triple_step(steps: usize) -> usize {
         // Your solution here
         use crate::solutions::_08_recursion_and_dynamic_programming::_01_triple_step as solutions;
-        solutions::Solution::triple_step(steps)
+        solutions::RecursionSolution::triple_step(steps)
     }
 }
 

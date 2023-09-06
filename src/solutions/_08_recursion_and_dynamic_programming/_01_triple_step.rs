@@ -5,7 +5,7 @@ pub struct Solution;
 impl TripleStep for Solution {
     fn triple_step(steps: usize) -> usize {
         match steps {
-            0 => 0,
+            0 => 1,
             1 => 1,
             2 => 2,
             3 => 4,
@@ -23,6 +23,23 @@ impl TripleStep for Solution {
                     stairs[i] = stairs[i - 1] + stairs[i - 2] + stairs[i - 3];
                 }
                 stairs[steps - 1]
+            }
+        }
+    }
+}
+
+pub struct RecursionSolution;
+
+impl TripleStep for RecursionSolution {
+    fn triple_step(steps: usize) -> usize {
+        match steps {
+            0 => 1,
+            1 => 1,
+            2 => 2,
+            _ => {
+                Self::triple_step(steps - 1)
+                    + Self::triple_step(steps - 2)
+                    + Self::triple_step(steps - 3)
             }
         }
     }
