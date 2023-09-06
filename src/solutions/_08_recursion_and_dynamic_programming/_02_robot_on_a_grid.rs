@@ -5,6 +5,7 @@ use crate::problems::_08_recursion_and_dynamic_programming::_02_robot_on_a_grid:
 pub struct Solution;
 
 impl RobotOnAGrid for Solution {
+    #[allow(clippy::needless_range_loop)]
     fn robot_on_a_grid(floor: &Floor) -> Option<Vec<Step>> {
         let index = |x, y| y * floor.width() + x;
         let mut access = vec![None; floor.width() * floor.height()];

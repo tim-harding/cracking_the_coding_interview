@@ -1,15 +1,14 @@
 use crate::problems::_01_arrays_and_strings::_05_one_away::OneAway;
+use std::cmp::Ordering;
 
 pub struct Solution;
 
 impl OneAway for Solution {
     fn one_away(a: &str, b: &str) -> bool {
-        if a.len() == b.len() {
-            is_edit(a, b)
-        } else if a.len() < b.len() {
-            is_deletion(a, b)
-        } else {
-            is_deletion(b, a)
+        match a.cmp(b) {
+            Ordering::Less => is_deletion(a, b),
+            Ordering::Equal => is_edit(a, b),
+            Ordering::Greater => is_deletion(b, a),
         }
     }
 }
