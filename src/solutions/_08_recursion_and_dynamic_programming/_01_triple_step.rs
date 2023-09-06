@@ -44,3 +44,29 @@ impl TripleStep for RecursionSolution {
         }
     }
 }
+
+pub struct MemoizedSolution;
+
+impl TripleStep for MemoizedSolution {
+    fn triple_step(steps: usize) -> usize {
+        Self::triple_step_inner(steps, &mut vec![0; steps + 1])
+    }
+}
+
+impl MemoizedSolution {
+    fn triple_step_inner(steps: usize, memo: &mut Vec<usize>) -> usize {
+        match steps {
+            0 => 1,
+            1 => 1,
+            2 => 2,
+            _ => {
+                if memo[steps] == 0 {
+                    memo[steps] = Self::triple_step_inner(steps - 1, memo)
+                        + Self::triple_step_inner(steps - 2, memo)
+                        + Self::triple_step_inner(steps - 3, memo);
+                }
+                memo[steps]
+            }
+        }
+    }
+}
