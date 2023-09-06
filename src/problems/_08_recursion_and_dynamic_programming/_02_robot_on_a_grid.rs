@@ -32,6 +32,7 @@ pub struct Floor {
 }
 
 impl Floor {
+    #[allow(unused)]
     pub fn new(width: usize, height: usize) -> Self {
         Self {
             width,
@@ -55,6 +56,7 @@ impl Floor {
         (self.cells[bit / 8] >> (bit % 8)) & 1 == 1
     }
 
+    #[allow(unused)]
     pub fn set_off_limits(&mut self, x: usize, y: usize) {
         assert!(x < self.width);
         assert!(y < self.height);
@@ -62,6 +64,7 @@ impl Floor {
         self.cells[bit / 8] |= 1 << (bit % 8);
     }
 
+    #[allow(unused)]
     pub fn is_valid_path(&self, steps: &[Step]) -> bool {
         let mut x = 0;
         let mut y = 0;

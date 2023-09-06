@@ -6,6 +6,7 @@ pub struct Solution;
 
 impl RobotOnAGrid for Solution {
     fn robot_on_a_grid(floor: &Floor) -> Option<Vec<Step>> {
+        let index = |x, y| y * floor.width() + x;
         let mut access = vec![None; floor.width() * floor.height()];
         for y in 1..floor.height() {
             if floor.is_off_limits(0, y) {
@@ -25,14 +26,14 @@ impl RobotOnAGrid for Solution {
             for x in 1..floor.width() {
                 let step = if floor.is_off_limits(x, y) {
                     continue;
-                } else if access[(y - 1) * floor.width() + x].is_some() {
+                } else if access[index(x, y - 1)].is_some() {
                     Step::Down
-                } else if access[y * floor.width() + x - 1].is_some() {
+                } else if access[index(x - 1, y)].is_some() {
                     Step::Right
                 } else {
                     continue;
                 };
-                access[y * floor.width() + x] = Some(step);
+                access[index(x, y)] = Some(step);
             }
         }
 
@@ -47,7 +48,7 @@ impl RobotOnAGrid for Solution {
         let mut y = floor.height() - 1;
         while i > 0 {
             i -= 1;
-            let step = access[y * floor.width() + x].unwrap();
+            let step = access[index(x, y)].unwrap();
             match step {
                 Step::Right => x -= 1,
                 Step::Down => y -= 1,
