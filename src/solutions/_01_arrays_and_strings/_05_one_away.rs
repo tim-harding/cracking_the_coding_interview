@@ -5,7 +5,7 @@ pub struct Solution;
 
 impl OneAway for Solution {
     fn one_away(a: &str, b: &str) -> bool {
-        match a.cmp(b) {
+        match a.len().cmp(&b.len()) {
             Ordering::Less => is_deletion(a, b),
             Ordering::Equal => is_edit(a, b),
             Ordering::Greater => is_deletion(b, a),
