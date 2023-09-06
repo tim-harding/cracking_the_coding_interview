@@ -38,7 +38,7 @@ fn append_count(s: &mut String, mut count: usize) {
     let v = unsafe { s.as_mut_vec() };
     let mut count_chars = 0;
     while count > 0 {
-        v.push((count % 10) as u8 + '0' as u8);
+        v.push((count % 10) as u8 + b'0');
         count /= 10;
         count_chars += 1;
     }

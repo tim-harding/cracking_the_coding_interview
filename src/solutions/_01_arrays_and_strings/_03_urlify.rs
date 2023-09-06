@@ -8,10 +8,10 @@ impl Urlify for Solution {
         let mut dst = bytes.len();
         for i in (0..len).rev() {
             dst -= 1;
-            if bytes[i] == ' ' as u8 {
-                bytes[dst - 2] = '%' as u8;
-                bytes[dst - 1] = '2' as u8;
-                bytes[dst - 0] = '0' as u8;
+            if bytes[i] == b' ' {
+                bytes[dst - 2] = b'%';
+                bytes[dst - 1] = b'2';
+                bytes[dst] = b'0';
                 dst -= 2;
             } else {
                 bytes[dst] = bytes[i];

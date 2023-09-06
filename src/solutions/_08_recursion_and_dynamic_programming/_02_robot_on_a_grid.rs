@@ -37,9 +37,7 @@ impl RobotOnAGrid for Solution {
             }
         }
 
-        if access[floor.height() * floor.width() - 1].is_none() {
-            return None;
-        }
+        access[floor.height() * floor.width() - 1]?;
 
         let mut path = vec![Step::Right; floor.width() + floor.height() - 2];
 
