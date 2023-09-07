@@ -5,6 +5,7 @@ pub struct Solution;
 
 impl MagicIndex for Solution {
     fn magic_index_distinct(array: &[i64]) -> Option<usize> {
+        // Binary search for the magic index
         let mut left = 0;
         let mut right = array.len();
         while left < right {
@@ -25,6 +26,12 @@ impl MagicIndex for Solution {
 
 impl Solution {
     fn magic_index_indistinct_inner(array: &[i64], left: usize, right: usize) -> Option<usize> {
+        // If the elements are not unique, we can't use binary search as before.
+        // Either side could contain the magic index so we search both sides.
+        // However, we can narrow the search by noting that if, for example,
+        // array[5] = 3, then array[4] cannot be the magic index. Similarly, if
+        // array[2] = 5, then neither array[3] nor array[4] can be the magic
+        // index.
         if right < left {
             return None;
         }
